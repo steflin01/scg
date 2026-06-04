@@ -33,6 +33,7 @@ jobs:
         run: |
           mkdir -p public/images
           cp index.html public/
+          cp 404.html public/
           cp impressum.html public/
           cp datenschutz.html public/
           cp styles.css public/
@@ -56,6 +57,7 @@ jobs:
           printf '%s\n' "$STAGE_HTPASSWD_LINE" > public/.htpasswd
           cat >> public/.htaccess <<EOF
 
+          ErrorDocument 404 /stage/404.html
           AuthType Basic
           AuthName "SCG Badminton Stage"
           AuthUserFile $STAGE_HTPASSWD_PATH

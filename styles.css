@@ -596,6 +596,62 @@ p {
   text-decoration: underline;
 }
 
+.not-found {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  background:
+    linear-gradient(90deg, rgba(11, 46, 82, 0.90), rgba(11, 46, 82, 0.68)),
+    url("images/hero-badminton.png") center / cover;
+  color: white;
+}
+
+@supports (background-image: image-set(url("images/hero-badminton.webp") type("image/webp"))) {
+  .not-found {
+    background-image:
+      linear-gradient(90deg, rgba(11, 46, 82, 0.90), rgba(11, 46, 82, 0.68)),
+      image-set(
+        url("images/hero-badminton.webp") type("image/webp"),
+        url("images/hero-badminton.png") type("image/png")
+      );
+  }
+}
+
+.not-found__panel {
+  width: min(100%, 720px);
+}
+
+.not-found__logo {
+  width: 90px;
+  height: auto;
+  margin-bottom: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.not-found h1 {
+  max-width: 680px;
+  margin: 0 0 1rem;
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  line-height: 1.1;
+}
+
+.not-found p {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.05rem;
+}
+
+.not-found__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+}
+
 @media (max-width: 640px) {
   .hero {
     padding: 3rem 1rem;
