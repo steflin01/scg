@@ -58,6 +58,7 @@ jobs:
           cat >> public/.htaccess <<EOF
 
           ErrorDocument 404 /stage/404.html
+          Header set X-Robots-Tag "noindex, nofollow, noarchive"
           AuthType Basic
           AuthName "SCG Badminton Stage"
           AuthUserFile $STAGE_HTPASSWD_PATH
