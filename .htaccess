@@ -3,6 +3,24 @@ DirectoryIndex index.html
 AddDefaultCharset UTF-8
 ErrorDocument 404 /404.html
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^trainingszeiten-2/?$ /#training [R=301,L,NE]
+  RewriteRule ^kontakt/?$ /#kontakt [R=301,L,NE]
+  RewriteRule ^anfahrt/?$ /#anfahrt [R=301,L,NE]
+  RewriteRule ^ansprechpartner/?$ /#kontakt [R=301,L,NE]
+  RewriteRule ^impressum/?$ /impressum.html [R=301,L]
+  RewriteRule ^datenschutz/?$ /datenschutz.html [R=301,L]
+  RewriteRule ^mannschaften/?$ /#teams [R=301,L,NE]
+  RewriteRule ^senioren/?$ /#teams [R=301,L,NE]
+  RewriteRule ^junioren/?$ /#teams [R=301,L,NE]
+  RewriteRule ^badminton-links/?$ / [R=301,L]
+  RewriteRule ^author/ / [R=301,L]
+  RewriteRule ^category/ /#news [R=301,L,NE]
+  RewriteRule ^20[0-9]{2}/ /#news [R=301,L,NE]
+</IfModule>
+
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
