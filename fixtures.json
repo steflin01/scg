@@ -1,0 +1,38 @@
+{
+    "updatedAt": "2026-06-04T16:11:50+00:00",
+    "source": "https:\/\/dbv.turnier.de",
+    "teams": {
+        "710": {
+            "teamName": "SC Gremmendorf 1",
+            "datetime": "2026-09-12T18:00:00+02:00",
+            "home": "ATV Haltern 1",
+            "away": "SC Gremmendorf 1",
+            "location": "45721 Haltern, SpH Josef-Hennewig-HS Holtwicker Str., Auf der Hovestatt 4",
+            "url": "https:\/\/dbv.turnier.de\/sport\/teammatch.aspx?id=D6F7A756-39F3-4CB4-8F27-0E30E0421F4A&match=2469"
+        },
+        "758": {
+            "teamName": "SC Gremmendorf 2",
+            "datetime": "2026-09-12T18:00:00+02:00",
+            "home": "TV Emsdetten 6",
+            "away": "SC Gremmendorf 2",
+            "location": "48282 Emsdetten, Euregio-SpH, Albertstr. 1",
+            "url": "https:\/\/dbv.turnier.de\/sport\/teammatch.aspx?id=D6F7A756-39F3-4CB4-8F27-0E30E0421F4A&match=4069"
+        },
+        "811": {
+            "teamName": "SC Gremmendorf 3",
+            "datetime": "2026-09-12T18:00:00+02:00",
+            "home": "SC Hörstel 3",
+            "away": "SC Gremmendorf 3",
+            "location": "48477 Hörstel, SpH Harkenberg, Westfalenstr. 11",
+            "url": "https:\/\/dbv.turnier.de\/sport\/teammatch.aspx?id=D6F7A756-39F3-4CB4-8F27-0E30E0421F4A&match=5797"
+        },
+        "861": {
+            "teamName": "SC Gremmendorf J1",
+            "datetime": "2026-09-12T15:00:00+02:00",
+            "home": "SuS Legden M1",
+            "away": "SC Gremmendorf M1",
+            "location": "48739 Legden, Sporthalle, Wibbeltstr. 13-15",
+            "url": "https:\/\/dbv.turnier.de\/sport\/teammatch.aspx?id=D6F7A756-39F3-4CB4-8F27-0E30E0421F4A&match=7389"
+        }
+    }
+}

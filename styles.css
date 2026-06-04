@@ -1,0 +1,586 @@
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --accent: #0f4a8c;
+  --accent-strong: #0f4a8c;
+  --border: #d1d5db;
+  --club-blue: #0f4a8c;
+  --club-green: #1f8d3d;
+  --club-dark: #0b2e52;
+  --club-sand: #fff8ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(11, 46, 82, 0.88), rgba(11, 46, 82, 0.62)),
+    url("images/hero-badminton.png") center / cover;
+  color: white;
+  padding: 5rem 1rem;
+}
+
+.hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.hero__logo {
+  width: 90px;
+  height: auto;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.12);
+  padding: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.hero__eyebrow {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.85);
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+}
+
+.hero p {
+  max-width: 720px;
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero__actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.button {
+  display: inline-block;
+  background: white;
+  color: var(--accent-strong);
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.2);
+}
+
+.button:focus-visible,
+.team-card__link:focus-visible {
+  outline: 3px solid rgba(15, 74, 140, 0.35);
+  outline-offset: 3px;
+}
+
+.button--secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.button--secondary:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.button--secondary:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.75);
+}
+
+.section {
+  padding: 3rem 1rem;
+}
+
+.section--light {
+  background: #ffffff;
+}
+
+.section--teams {
+  background:
+    linear-gradient(135deg, rgba(15, 74, 140, 0.10), rgba(31, 141, 61, 0.10)),
+    #f8fbff;
+}
+
+.section--teams h2 {
+  color: var(--club-dark);
+}
+
+.section--teams > .container > p {
+  max-width: 680px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  color: var(--accent-strong);
+}
+
+p {
+  color: var(--muted);
+}
+
+.cards,
+.news-grid,
+.team-list {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.card,
+.team-card,
+.news-item,
+.contact-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.05);
+}
+
+.card h3,
+.team-card h3,
+.news-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.team-list {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(15, 74, 140, 0.18);
+  border-left-width: 0;
+  padding-top: 1.75rem;
+  box-shadow: 0 16px 34px rgba(11, 46, 82, 0.08);
+}
+
+.team-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.45rem;
+  background: linear-gradient(90deg, var(--club-blue), var(--club-green));
+  pointer-events: none;
+}
+
+.team-card h3 {
+  position: relative;
+  z-index: 1;
+}
+
+.team-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.team-card__link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--club-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.team-card__link:hover,
+.team-card__link:focus {
+  color: var(--club-dark);
+  text-decoration: underline;
+}
+
+.team-fixture {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(15, 74, 140, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.team-fixture p {
+  margin: 0;
+}
+
+.team-fixture__label {
+  color: var(--club-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.team-fixture__date {
+  margin-top: 0.25rem;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.team-fixture__text {
+  margin-top: 0.25rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.team-fixture__location {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.team-fixture[data-fixture-status="loading"] .team-fixture__text,
+.team-fixture[data-fixture-status="empty"] .team-fixture__text,
+.team-fixture[data-fixture-status="error"] .team-fixture__text {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.team-card--bezirksklasse {
+  background: linear-gradient(145deg, rgba(15, 74, 140, 0.13), rgba(255, 255, 255, 0.92));
+}
+
+.team-card--bezirksklasse::before {
+  background: var(--club-blue);
+}
+
+.team-card--kreisliga {
+  background: linear-gradient(145deg, rgba(31, 141, 61, 0.15), rgba(255, 255, 255, 0.92));
+}
+
+.team-card--kreisliga::before {
+  background: var(--club-green);
+}
+
+.team-card--kreisklasse {
+  background: linear-gradient(145deg, rgba(11, 46, 82, 0.12), rgba(255, 255, 255, 0.92));
+}
+
+.team-card--kreisklasse::before {
+  background: var(--club-dark);
+}
+
+.team-card--jugend {
+  background: linear-gradient(145deg, rgba(15, 74, 140, 0.12), rgba(31, 141, 61, 0.13), rgba(255, 255, 255, 0.92));
+}
+
+.team-card--jugend::before {
+  background: linear-gradient(90deg, var(--club-blue), var(--club-green));
+}
+
+.cards,
+.news-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.anfahrt-grid,
+.contact-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(250px, 1fr) minmax(320px, 1.2fr);
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.map-frame {
+  position: relative;
+  min-height: 320px;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.05);
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+  pointer-events: none;
+}
+
+.map-frame.is-active iframe {
+  pointer-events: auto;
+}
+
+.map-frame__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 0;
+  background: rgba(11, 46, 82, 0.18);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.map-frame__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(11, 46, 82, 0.34));
+}
+
+.map-frame__overlay span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 6px rgba(11, 46, 82, 0.75);
+}
+
+.map-frame__overlay:hover,
+.map-frame__overlay:focus-visible {
+  background: rgba(11, 46, 82, 0.28);
+}
+
+.map-frame__overlay:focus-visible {
+  outline: 3px solid rgba(15, 74, 140, 0.45);
+  outline-offset: -6px;
+}
+
+.map-frame.is-active .map-frame__overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.05);
+}
+
+.contact-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form-status {
+  padding: 1rem 1rem 0;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.form-status.success {
+  color: #0f766e;
+}
+
+.form-status.error {
+  color: #b91c1c;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.05);
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-group--hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #f9fafb;
+  color: var(--text);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.08);
+}
+
+.button--primary {
+  background: var(--accent);
+  color: white;
+}
+
+.subpage-header {
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--club-blue), var(--club-dark));
+  color: white;
+}
+
+.subpage-header h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.subpage-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.subpage-header__back {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: white;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.legal-content {
+  max-width: 760px;
+}
+
+.legal-content h2 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.35rem;
+  color: var(--club-dark);
+}
+
+.legal-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-note {
+  padding: 0.85rem 1rem;
+  border-left: 0.35rem solid var(--club-green);
+  background: rgba(31, 141, 61, 0.10);
+  color: var(--text);
+}
+
+.footer {
+  padding: 2rem 1rem;
+  background: var(--club-dark);
+  color: white;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.footer__brand {
+  margin-top: 0;
+  color: white;
+  font-weight: 800;
+}
+
+.footer__nav {
+  display: flex;
+  gap: 0.75rem 1.25rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .anfahrt-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-frame,
+  .map-frame iframe {
+    min-height: 260px;
+  }
+
+  .footer__nav {
+    justify-content: flex-start;
+  }
+}
