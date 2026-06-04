@@ -41,6 +41,8 @@ jobs:
           cp contact.php public/
           cp update-fixtures.php public/
           cp fixtures.json public/
+          cp robots.txt public/
+          cp sitemap.xml public/
           cp .htaccess public/
           cp images/logo.png public/images/
           cp images/hero-badminton.png public/images/

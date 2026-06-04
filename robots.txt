@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /stage/
+Disallow: /cgi-bin/
+
+Sitemap: https://scg-badminton.de/sitemap.xml
