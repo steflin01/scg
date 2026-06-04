@@ -2,10 +2,29 @@ name: Deploy site
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Deployment-Ziel"
+        required: true
+        default: "stage"
+        type: choice
+        options:
+          - stage
+          - live
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site-${{ inputs.target }}
+  cancel-in-progress: false
 
 jobs:
   deploy-site:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.target }}
+      url: ${{ vars.SITE_URL }}
 
     steps:
       - name: Check out repository
@@ -20,6 +39,7 @@ jobs:
           cp styles.css public/
           cp script.js public/
           cp contact.php public/
+          cp update-fixtures.php public/
           cp fixtures.json public/
           cp .htaccess public/
           cp images/logo.png public/images/

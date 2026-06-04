@@ -49,11 +49,28 @@ Der Workflow `.github/workflows/update-fixtures.yml` aktualisiert `fixtures.json
 
 Der Workflow kann in GitHub unter `Actions` auch manuell über `Run workflow` gestartet werden.
 
-## Manuelles Deployment der Website
+## Deployment der Website
 
 Der Workflow `.github/workflows/deploy-site.yml` lädt die öffentlichen Website-Dateien manuell auf den Webserver hoch. Er wird nicht automatisch bei jedem Push gestartet, sondern in GitHub unter `Actions` -> `Deploy site` -> `Run workflow`.
 
-Hochgeladen werden nur die öffentlichen Dateien wie HTML, CSS, JavaScript, Bilder, `contact.php`, `.htaccess` und `fixtures.json`. Token-Dateien, GitHub-Konfiguration, README und Import-Skripte werden nicht deployed.
+Beim Start wird als Ziel `stage` oder `live` ausgewählt. Die Zugangsdaten liegen in GitHub-Environments mit denselben Namen:
+
+- `stage` - Staging-Ziel
+- `live` - Live-Ziel
+
+Pro Environment müssen diese Secrets gesetzt werden:
+
+- `DEPLOY_HOST` - FTP/SFTP-Server, z. B. `example.org`
+- `DEPLOY_USER` - Benutzername
+- `DEPLOY_PASSWORD` - Passwort
+- `DEPLOY_PATH` - Zielordner auf dem Server, z. B. `/httpdocs/scg`
+- `DEPLOY_PROTOCOL` - optional, z. B. `ftp` oder `sftp`; Standard ist `ftp`
+
+Optional kann pro Environment die Variable `SITE_URL` gesetzt werden, damit GitHub nach dem Deployment direkt den passenden Link anzeigt.
+
+Für das Environment `live` kann in GitHub eine manuelle Freigabe eingerichtet werden. Dann bleibt der Ablauf einfach, aber ein Live-Deployment braucht vor dem Upload noch eine bewusste Bestätigung.
+
+Hochgeladen werden nur die öffentlichen Dateien wie HTML, CSS, JavaScript, Bilder, `contact.php`, `update-fixtures.php`, `.htaccess` und `fixtures.json`. Token-Dateien, GitHub-Konfiguration, README und Import-Skripte werden nicht deployed.
 
 ## Lokale Vorschau
 
