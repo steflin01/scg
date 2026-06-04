@@ -487,9 +487,24 @@ p {
   color: rgba(255, 255, 255, 0.86);
 }
 
+.subpage-header__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.subpage-header__logo {
+  width: 56px;
+  height: auto;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .subpage-header__back {
   display: inline-block;
-  margin-bottom: 1.25rem;
   color: white;
   font-weight: 700;
   text-decoration: underline;
