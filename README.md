@@ -79,6 +79,10 @@ Das Deployment-Ziel `stage` wird per HTTP Basic Auth geschützt. Dafür müssen 
 
 Die `.htpasswd` wird nur beim Stage-Deployment erzeugt und hochgeladen. Live erhält keinen Passwortschutz.
 
+## Offene Ideen
+
+- Bei den Mannschaftskarten zusätzlich zum nächsten Spiel das Ergebnis des letzten gespielten Mannschaftsspiels anzeigen. Dafür sollte der Importer später neben dem nächsten zukünftigen Spiel auch das letzte vergangene Spiel mit vorhandenem Ergebnis aus den DBV-Teamspielplänen speichern. Umsetzung erst angehen, wenn echte Ergebnisdaten in der DBV-Tabelle verfügbar sind, damit Sonderfälle wie leere Ergebnisse, Verlegungen oder kampflose Spiele realistisch getestet werden können.
+
 ## Lokale Vorschau
 
 In einem Terminal im Ordner `scg` kannst du einen einfachen HTTP-Server starten:
