@@ -2,12 +2,30 @@ name: Update fixtures
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Deployment-Ziel"
+        required: true
+        default: "live"
+        type: choice
+        options:
+          - stage
+          - live
   schedule:
     - cron: "15 2 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-fixtures-${{ github.event_name == 'workflow_dispatch' && inputs.target || 'live' }}
+  cancel-in-progress: false
 
 jobs:
   update-fixtures:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event_name == 'workflow_dispatch' && inputs.target || 'live' }}
 
     steps:
       - name: Check out repository

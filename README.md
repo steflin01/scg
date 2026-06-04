@@ -39,15 +39,15 @@ Die echte Datei `.update-fixtures-token.php` enthält ein Geheimnis und wird nic
 
 ## Automatische Aktualisierung über GitHub Actions
 
-Der Workflow `.github/workflows/update-fixtures.yml` aktualisiert `fixtures.json` täglich und lädt die Datei anschließend auf den Webserver hoch. Dafür müssen im GitHub-Repository unter `Settings` -> `Secrets and variables` -> `Actions` diese Secrets gesetzt werden:
+Der Workflow `.github/workflows/update-fixtures.yml` aktualisiert `fixtures.json` täglich und lädt die Datei anschließend auf den Webserver hoch. Der automatische Lauf aktualisiert `live`. Beim manuellen Start über `Actions` -> `Update fixtures` -> `Run workflow` kann als Ziel `stage` oder `live` ausgewählt werden.
+
+Die Zugangsdaten liegen in den GitHub-Environments `stage` und `live`. Pro Environment müssen diese Secrets gesetzt werden:
 
 - `DEPLOY_HOST` - FTP/SFTP-Server, z. B. `example.org`
 - `DEPLOY_USER` - Benutzername
 - `DEPLOY_PASSWORD` - Passwort
 - `DEPLOY_PATH` - Zielordner auf dem Server, z. B. `/httpdocs/scg`
 - `DEPLOY_PROTOCOL` - optional, z. B. `ftp` oder `sftp`; Standard ist `ftp`
-
-Der Workflow kann in GitHub unter `Actions` auch manuell über `Run workflow` gestartet werden.
 
 ## Deployment der Website
 
