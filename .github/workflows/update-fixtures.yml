@@ -40,6 +40,9 @@ jobs:
             set ftp:ssl-allow true;
             set ssl:verify-certificate no;
             cd $DEPLOY_PATH;
+            pwd;
+            cls -la;
             put fixtures.json;
+            cls -la fixtures.json;
             bye;
           "
