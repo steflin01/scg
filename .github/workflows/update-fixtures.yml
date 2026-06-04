@@ -1,0 +1,45 @@
+name: Update fixtures
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 2 * * *"
+
+jobs:
+  update-fixtures:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Update fixtures.json
+        run: python3 scripts/update-fixtures.py
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload fixtures.json
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PROTOCOL: ${{ secrets.DEPLOY_PROTOCOL || 'ftp' }}
+        run: |
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_PASSWORD"
+          test -n "$DEPLOY_PATH"
+          lftp -u "$DEPLOY_USER","$DEPLOY_PASSWORD" "$DEPLOY_PROTOCOL://$DEPLOY_HOST" -e "
+            set ftp:ssl-allow true;
+            set ssl:verify-certificate no;
+            cd $DEPLOY_PATH;
+            put fixtures.json;
+            bye;
+          "
