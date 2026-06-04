@@ -24,6 +24,7 @@ jobs:
           cp .htaccess public/
           cp images/logo.png public/images/
           cp images/hero-badminton.png public/images/
+          cp images/hero-badminton.webp public/images/
 
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
