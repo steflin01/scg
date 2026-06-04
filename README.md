@@ -49,6 +49,12 @@ Der Workflow `.github/workflows/update-fixtures.yml` aktualisiert `fixtures.json
 
 Der Workflow kann in GitHub unter `Actions` auch manuell über `Run workflow` gestartet werden.
 
+## Manuelles Deployment der Website
+
+Der Workflow `.github/workflows/deploy-site.yml` lädt die öffentlichen Website-Dateien manuell auf den Webserver hoch. Er wird nicht automatisch bei jedem Push gestartet, sondern in GitHub unter `Actions` -> `Deploy site` -> `Run workflow`.
+
+Hochgeladen werden nur die öffentlichen Dateien wie HTML, CSS, JavaScript, Bilder, `contact.php`, `.htaccess` und `fixtures.json`. Token-Dateien, GitHub-Konfiguration, README und Import-Skripte werden nicht deployed.
+
 ## Lokale Vorschau
 
 In einem Terminal im Ordner `scg` kannst du einen einfachen HTTP-Server starten:
