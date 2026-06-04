@@ -66,8 +66,6 @@ Pro Environment müssen diese Secrets gesetzt werden:
 - `DEPLOY_PATH` - Zielordner auf dem Server, z. B. `/httpdocs/scg`
 - `DEPLOY_PROTOCOL` - optional, z. B. `ftp` oder `sftp`; Standard ist `ftp`
 
-Optional kann pro Environment die Variable `SITE_URL` gesetzt werden, damit GitHub nach dem Deployment direkt den passenden Link anzeigt.
-
 Für das Environment `live` kann in GitHub eine manuelle Freigabe eingerichtet werden. Dann bleibt der Ablauf einfach, aber ein Live-Deployment braucht vor dem Upload noch eine bewusste Bestätigung.
 
 Hochgeladen werden nur die öffentlichen Dateien wie HTML, CSS, JavaScript, Bilder, `contact.php`, `update-fixtures.php`, `.htaccess` und `fixtures.json`. Token-Dateien, GitHub-Konfiguration, README und Import-Skripte werden nicht deployed.
