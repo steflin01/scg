@@ -70,6 +70,15 @@ Für das Environment `live` kann in GitHub eine manuelle Freigabe eingerichtet w
 
 Hochgeladen werden nur die öffentlichen Dateien wie HTML, CSS, JavaScript, Bilder, `contact.php`, `update-fixtures.php`, `.htaccess` und `fixtures.json`. Token-Dateien, GitHub-Konfiguration, README und Import-Skripte werden nicht deployed.
 
+### Stage-Zugangsschutz
+
+Das Deployment-Ziel `stage` wird per HTTP Basic Auth geschützt. Dafür müssen im GitHub-Environment `stage` zusätzlich diese Secrets gesetzt werden:
+
+- `STAGE_HTPASSWD_LINE` - eine komplette `.htpasswd`-Zeile, z. B. `benutzername:$2y$...`
+- `STAGE_HTPASSWD_PATH` - absoluter Server-Dateipfad zur `.htpasswd`, z. B. `/var/www/vhosts/example.org/httpdocs/stage/.htpasswd`
+
+Die `.htpasswd` wird nur beim Stage-Deployment erzeugt und hochgeladen. Live erhält keinen Passwortschutz.
+
 ## Lokale Vorschau
 
 In einem Terminal im Ordner `scg` kannst du einen einfachen HTTP-Server starten:

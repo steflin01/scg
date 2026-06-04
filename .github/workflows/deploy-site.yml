@@ -45,6 +45,23 @@ jobs:
           cp images/hero-badminton.png public/images/
           cp images/hero-badminton.webp public/images/
 
+      - name: Protect stage with basic auth
+        if: ${{ inputs.target == 'stage' }}
+        env:
+          STAGE_HTPASSWD_LINE: ${{ secrets.STAGE_HTPASSWD_LINE }}
+          STAGE_HTPASSWD_PATH: ${{ secrets.STAGE_HTPASSWD_PATH }}
+        run: |
+          test -n "$STAGE_HTPASSWD_LINE"
+          test -n "$STAGE_HTPASSWD_PATH"
+          printf '%s\n' "$STAGE_HTPASSWD_LINE" > public/.htpasswd
+          cat >> public/.htaccess <<EOF
+
+          AuthType Basic
+          AuthName "SCG Badminton Stage"
+          AuthUserFile $STAGE_HTPASSWD_PATH
+          Require valid-user
+          EOF
+
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
