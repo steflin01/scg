@@ -37,6 +37,7 @@ jobs:
           test -n "$DEPLOY_PASSWORD"
           test -n "$DEPLOY_PATH"
           lftp -u "$DEPLOY_USER","$DEPLOY_PASSWORD" "$DEPLOY_PROTOCOL://$DEPLOY_HOST" -e "
+            set cmd:fail-exit yes;
             set ftp:ssl-allow true;
             set ssl:verify-certificate no;
             cd $DEPLOY_PATH;
