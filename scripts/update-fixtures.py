@@ -128,8 +128,16 @@ def parse_matches(page):
     return matches
 
 
+def is_gremmendorf_match(match):
+    return "gremmendorf" in f"{match['home']} {match['away']}".lower()
+
+
 def next_match(matches, now):
-    future_matches = [match for match in matches if match["datetime"] >= now]
+    future_matches = [
+        match
+        for match in matches
+        if match["datetime"] >= now and is_gremmendorf_match(match)
+    ]
     if not future_matches:
         return None
     return sorted(future_matches, key=lambda match: match["datetime"])[0]

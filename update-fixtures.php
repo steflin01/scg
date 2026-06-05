@@ -171,10 +171,16 @@ function parse_matches(string $page): array
     return $matches;
 }
 
+function is_gremmendorf_match(array $match): bool
+{
+    $teams = strtolower(($match['home'] ?? '') . ' ' . ($match['away'] ?? ''));
+    return str_contains($teams, 'gremmendorf');
+}
+
 function next_match(array $matches, DateTimeImmutable $now): ?array
 {
     $futureMatches = array_values(array_filter($matches, static function (array $match) use ($now): bool {
-        return $match['datetime'] >= $now;
+        return $match['datetime'] >= $now && is_gremmendorf_match($match);
     }));
 
     usort($futureMatches, static function (array $a, array $b): int {
