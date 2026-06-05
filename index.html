@@ -13,8 +13,23 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
+  <header id="top" class="hero">
     <div class="hero__inner">
+      <div class="site-nav">
+        <a href="#top" class="site-nav__home">SCG Badminton</a>
+        <button class="site-nav__toggle" type="button" aria-controls="siteNavigation" aria-expanded="false" aria-label="Navigation öffnen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="siteNavigation" class="site-nav__menu" aria-label="Hauptnavigation">
+          <a href="#training">Training</a>
+          <a href="#teams">Teams</a>
+          <a href="#news">Aktuelles</a>
+          <a href="#anfahrt">Anfahrt</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
       <div class="hero__brand">
         <img src="images/logo.png" alt="SC Gremmendorf Logo" class="hero__logo" />
         <div>

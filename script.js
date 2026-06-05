@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const siteNav = document.querySelector('.site-nav');
+  const navToggle = document.querySelector('.site-nav__toggle');
+  const navMenu = document.getElementById('siteNavigation');
+  if (siteNav && navToggle && navMenu) {
+    const closeNavigation = function () {
+      siteNav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Navigation öffnen');
+    };
+
+    navToggle.addEventListener('click', function () {
+      const isOpen = siteNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', isOpen ? 'Navigation schließen' : 'Navigation öffnen');
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeNavigation);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeNavigation();
+      }
+    });
+  }
+
   const links = document.querySelectorAll('a[href^="#"]');
   links.forEach(link => {
     link.addEventListener('click', function (event) {
