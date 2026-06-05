@@ -41,7 +41,12 @@ Die echte Datei `.update-fixtures-token.php` enthält ein Geheimnis und wird nic
 
 Der Workflow `.github/workflows/update-fixtures.yml` aktualisiert `fixtures.json` täglich und lädt die Datei anschließend auf den Webserver hoch. Der automatische Lauf aktualisiert `live`. Beim manuellen Start über `Actions` -> `Update fixtures` -> `Run workflow` kann als Ziel `stage` oder `live` ausgewählt werden.
 
-Die Zugangsdaten liegen in den GitHub-Environments `stage` und `live`. Pro Environment müssen diese Secrets gesetzt werden:
+Die Zugangsdaten liegen in GitHub-Environments:
+
+- `stage` - manuelle Aktualisierung der Stage-Datei
+- `live-fixtures` - automatische und manuelle Aktualisierung der Live-Datei, ohne Review-Schutz
+
+Pro Environment müssen diese Secrets gesetzt werden:
 
 - `DEPLOY_HOST` - FTP/SFTP-Server, z. B. `example.org`
 - `DEPLOY_USER` - Benutzername

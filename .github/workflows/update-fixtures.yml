@@ -25,7 +25,7 @@ jobs:
   update-fixtures:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event_name == 'workflow_dispatch' && inputs.target || 'live' }}
+      name: ${{ github.event_name == 'workflow_dispatch' && inputs.target == 'stage' && 'stage' || 'live-fixtures' }}
 
     steps:
       - name: Check out repository
