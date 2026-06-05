@@ -147,56 +147,6 @@ a {
   background: #ffffff;
 }
 
-.section--newcomer {
-  background: #ffffff;
-}
-
-.section-kicker {
-  margin: 0 0 0.5rem;
-  color: var(--club-green);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.newcomer {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 2rem;
-  align-items: center;
-}
-
-.newcomer__intro p {
-  max-width: 540px;
-}
-
-.newcomer__intro .button {
-  margin-top: 0.5rem;
-}
-
-.newcomer__facts {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.newcomer__fact {
-  min-height: 150px;
-  padding: 1.25rem;
-  border: 1px solid rgba(15, 74, 140, 0.14);
-  border-radius: 0.75rem;
-  background: #f8fbff;
-}
-
-.newcomer__fact h3 {
-  margin: 0 0 0.5rem;
-  color: var(--club-dark);
-}
-
-.newcomer__fact p {
-  margin: 0;
-}
-
 .section--teams {
   background:
     linear-gradient(135deg, rgba(15, 74, 140, 0.10), rgba(31, 141, 61, 0.10)),
@@ -251,6 +201,27 @@ p {
   margin-top: 0;
   margin-bottom: 0.75rem;
   color: var(--text);
+}
+
+.news-details {
+  margin-top: 1rem;
+}
+
+.news-details summary {
+  cursor: pointer;
+  color: var(--club-dark);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.news-details summary:focus-visible {
+  outline: 3px solid rgba(15, 74, 140, 0.35);
+  outline-offset: 3px;
+}
+
+.news-details p:last-child {
+  margin-bottom: 0;
 }
 
 .team-list {
@@ -712,17 +683,8 @@ p {
   }
 
   .anfahrt-grid,
-  .contact-grid,
-  .newcomer {
+  .contact-grid {
     grid-template-columns: 1fr;
-  }
-
-  .newcomer__facts {
-    grid-template-columns: 1fr;
-  }
-
-  .newcomer__fact {
-    min-height: auto;
   }
 
   .map-frame,
