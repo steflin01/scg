@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const initGallery = function (items) {
-      const galleryItems = items.filter(item => item && item.src);
+      const galleryItems = items.filter(item => item && item.src && item.enabled !== false);
       if (!galleryItems.length) {
         setGalleryVisibility(false);
         setControlsVisibility();
