@@ -164,10 +164,6 @@ if (field('website') !== '') {
     respond(200, true, 'Danke! Deine Nachricht wurde gesendet.');
 }
 
-if (request_header('X-SCG-Form') !== 'contact') {
-    reject_suspicious_submission('missing_form_header');
-}
-
 $startedAt = (int)field('form_started_at');
 $formToken = field('form_token');
 if ($startedAt <= 0 || $formToken !== ('scg-contact-' . $startedAt)) {
