@@ -10,6 +10,8 @@ const MIN_SUBMIT_SECONDS = 4;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 const RATE_LIMIT_MAX_SUBMISSIONS = 5;
 const RATE_LIMIT_MIN_SECONDS = 45;
+const MAX_MESSAGE_URLS = 1;
+const MIN_MESSAGE_LENGTH = 15;
 
 function respond(int $statusCode, bool $success, string $message): never
 {
@@ -30,6 +32,46 @@ function field(string $name): string
 function clean_header_value(string $value): string
 {
     return trim(str_replace(["\r", "\n"], ' ', $value));
+}
+
+function request_header(string $name): string
+{
+    $key = 'HTTP_' . strtoupper(str_replace('-', '_', $name));
+    return (string)($_SERVER[$key] ?? '');
+}
+
+function contains_url(string $value): bool
+{
+    return preg_match('~(?:https?://|www\.|[a-z0-9.-]+\.[a-z]{2,})(?:\S*)~iu', $value) === 1;
+}
+
+function url_count(string $value): int
+{
+    preg_match_all('~(?:https?://|www\.|[a-z0-9.-]+\.[a-z]{2,})(?:\S*)~iu', $value, $matches);
+    return count($matches[0] ?? []);
+}
+
+function has_spam_pattern(string $value): bool
+{
+    $patterns = [
+        '~\[(?:url|link)=~i',
+        '~</?a\b~i',
+        '~\b(?:casino|viagra|cialis|crypto|bitcoin|forex|loan|porn|escort)\b~i',
+        '~\b(?:backlink|guest\s*post|link\s*building|seo\s*services|increase\s*traffic)\b~i',
+    ];
+
+    foreach ($patterns as $pattern) {
+        if (preg_match($pattern, $value) === 1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function reject_suspicious_submission(): never
+{
+    respond(400, false, 'Bitte prüfe deine Eingaben und sende das Formular erneut.');
 }
 
 function client_ip(): string
@@ -80,9 +122,18 @@ if (field('website') !== '') {
     respond(200, true, 'Danke! Deine Nachricht wurde gesendet.');
 }
 
+if (request_header('X-SCG-Form') !== 'contact') {
+    reject_suspicious_submission();
+}
+
 $startedAt = (int)field('form_started_at');
-if ($startedAt > 0 && (time() - $startedAt) < MIN_SUBMIT_SECONDS) {
-    respond(400, false, 'Bitte prüfe deine Eingaben und sende das Formular erneut.');
+$formToken = field('form_token');
+if ($startedAt <= 0 || $formToken !== ('scg-contact-' . $startedAt)) {
+    reject_suspicious_submission();
+}
+
+if ((time() - $startedAt) < MIN_SUBMIT_SECONDS) {
+    reject_suspicious_submission();
 }
 
 enforce_rate_limit(client_ip());
@@ -100,12 +151,24 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(400, false, 'Bitte gib eine gültige E-Mail-Adresse ein.');
 }
 
+if (mb_strlen($message) < MIN_MESSAGE_LENGTH) {
+    respond(400, false, 'Bitte schreibe eine etwas ausführlichere Nachricht.');
+}
+
 if (mb_strlen($name) > 120 || mb_strlen($email) > 180 || mb_strlen($subject) > 180) {
     respond(400, false, 'Eine deiner Eingaben ist zu lang.');
 }
 
 if (mb_strlen($message) > 5000) {
     respond(400, false, 'Deine Nachricht ist zu lang.');
+}
+
+if (contains_url($name) || contains_url($subject) || url_count($message) > MAX_MESSAGE_URLS) {
+    reject_suspicious_submission();
+}
+
+if (has_spam_pattern($subject . "\n" . $message)) {
+    reject_suspicious_submission();
 }
 
 $safeName = clean_header_value($name);

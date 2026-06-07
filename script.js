@@ -141,8 +141,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const status = document.getElementById('formStatus');
   if (form && status) {
     const formStartedAt = document.getElementById('formStartedAt');
+    const formToken = document.getElementById('formToken');
+    const startedAt = Math.floor(Date.now() / 1000).toString();
     if (formStartedAt) {
-      formStartedAt.value = Math.floor(Date.now() / 1000).toString();
+      formStartedAt.value = startedAt;
+    }
+
+    if (formToken) {
+      formToken.value = `scg-contact-${startedAt}`;
     }
 
     form.addEventListener('submit', async function (event) {
@@ -161,7 +167,8 @@ document.addEventListener('DOMContentLoaded', function () {
           method: 'POST',
           body: new FormData(form),
           headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-SCG-Form': 'contact'
           }
         });
 
