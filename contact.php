@@ -90,6 +90,12 @@ function client_ip(): string
     return (string)($_SERVER['REMOTE_ADDR'] ?? 'unknown');
 }
 
+function is_stage_environment(): bool
+{
+    $scriptName = (string)($_SERVER['SCRIPT_NAME'] ?? '');
+    return str_contains($scriptName, '/stage/');
+}
+
 function log_blocked_submission(string $reason): void
 {
     $entry = [
@@ -172,7 +178,9 @@ if ((time() - $startedAt) < MIN_SUBMIT_SECONDS) {
     reject_suspicious_submission('submitted_too_fast');
 }
 
-enforce_rate_limit(client_ip());
+if (!is_stage_environment()) {
+    enforce_rate_limit(client_ip());
+}
 
 $name = field('name');
 $email = field('email');
@@ -215,9 +223,9 @@ $safeName = clean_header_value($name);
 $safeEmail = clean_header_value($email);
 $safeSubject = clean_header_value($subject);
 
-$mailSubject = MAIL_SUBJECT_PREFIX . ': ' . $safeSubject;
+$mailSubject = (is_stage_environment() ? '[STAGE TEST] ' : '') . MAIL_SUBJECT_PREFIX . ': ' . $safeSubject;
 $mailBody = implode("\n\n", [
-    'Neue Kontaktanfrage über die Website des SC Gremmendorf Badminton',
+    (is_stage_environment() ? 'Testanfrage über die Stage-Website des SC Gremmendorf Badminton' : 'Neue Kontaktanfrage über die Website des SC Gremmendorf Badminton'),
     'Name: ' . $name,
     'E-Mail: ' . $email,
     'Betreff: ' . $subject,
