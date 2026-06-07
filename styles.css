@@ -29,6 +29,10 @@ a {
   text-decoration: none;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -166,12 +170,17 @@ a {
   padding: 0.85rem 1.5rem;
   border-radius: 999px;
   font-weight: 700;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .button:hover {
-  transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(15, 118, 110, 0.2);
+}
+
+.hero__actions .button:not(.button--secondary):hover {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--club-dark);
+  box-shadow: 0 12px 30px rgba(11, 46, 82, 0.18);
 }
 
 .button:focus-visible,
@@ -187,7 +196,6 @@ a {
 }
 
 .button--secondary:hover {
-  transform: none;
   box-shadow: none;
   background: rgba(255, 255, 255, 0.12);
 }
