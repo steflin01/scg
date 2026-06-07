@@ -1,0 +1,50 @@
+[
+  {
+    "src": "images/gallery/dsc_0281.jpg",
+    "alt": "Badmintonschlaeger und Federball in der Halle",
+    "caption": "Training, Spiel und Bewegung in der Halle.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0281-2.jpg",
+    "alt": "Badminton-Impression aus der Sporthalle",
+    "caption": "Badminton in Muenster-Gremmendorf.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0282.jpg",
+    "alt": "Federball und Badmintonschlaeger als sportliche Impression",
+    "caption": "Platz fuer Probetraining, Mannschaftsspieler und freies Spiel.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0282-2.jpg",
+    "alt": "Badmintonschlaeger und Federball in der Halle",
+    "caption": "Training, Spiel und Bewegung in der Halle.",
+    "enabled": false
+  },
+  {
+    "src": "images/gallery/dsc_0283.jpg",
+    "alt": "Badminton-Impression aus der Sporthalle",
+    "caption": "Badminton in Muenster-Gremmendorf.",
+    "enabled": false
+  },
+  {
+    "src": "images/gallery/dsc_0283-2.jpg",
+    "alt": "Federball und Badmintonschlaeger als sportliche Impression",
+    "caption": "Platz fuer Probetraining, Mannschaftsspieler und freies Spiel.",
+    "enabled": false
+  },
+  {
+    "src": "images/gallery/dsc_0284.jpg",
+    "alt": "Badmintonschlaeger und Federball in der Halle",
+    "caption": "Training, Spiel und Bewegung in der Halle.",
+    "enabled": false
+  },
+  {
+    "src": "images/gallery/dsc_0284-2.jpg",
+    "alt": "Badminton-Impression aus der Sporthalle",
+    "caption": "Badminton in Muenster-Gremmendorf.",
+    "enabled": false
+  }
+]

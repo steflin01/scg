@@ -38,6 +38,7 @@ jobs:
           cp datenschutz.html public/
           cp styles.css public/
           cp script.js public/
+          cp gallery.json public/
           cp contact.php public/
           cp update-fixtures.php public/
           cp fixtures.json public/
@@ -53,6 +54,10 @@ jobs:
           cp images/logo.png public/images/
           cp images/hero-badminton.png public/images/
           cp images/hero-badminton.webp public/images/
+          if [ -d images/gallery ]; then
+            mkdir -p public/images/gallery
+            cp -R images/gallery/. public/images/gallery/
+          fi
 
       - name: Protect stage with basic auth
         if: ${{ inputs.target == 'stage' }}
