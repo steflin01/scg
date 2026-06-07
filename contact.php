@@ -10,8 +10,9 @@ const MIN_SUBMIT_SECONDS = 4;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 const RATE_LIMIT_MAX_SUBMISSIONS = 5;
 const RATE_LIMIT_MIN_SECONDS = 45;
-const MAX_MESSAGE_URLS = 1;
+const MAX_MESSAGE_URLS = 0;
 const MIN_MESSAGE_LENGTH = 15;
+const MAX_NON_LATIN_LETTER_RATIO = 0.20;
 
 function respond(int $statusCode, bool $success, string $message): never
 {
@@ -67,6 +68,20 @@ function has_spam_pattern(string $value): bool
     }
 
     return false;
+}
+
+function has_too_many_non_latin_letters(string $value): bool
+{
+    preg_match_all('~\p{L}~u', $value, $letterMatches);
+    $letters = count($letterMatches[0] ?? []);
+    if ($letters < 12) {
+        return false;
+    }
+
+    preg_match_all('~(?![\p{Latin}\p{Common}\p{Inherited}])\p{L}~u', $value, $nonLatinMatches);
+    $nonLatinLetters = count($nonLatinMatches[0] ?? []);
+
+    return ($nonLatinLetters / $letters) > MAX_NON_LATIN_LETTER_RATIO;
 }
 
 function reject_suspicious_submission(): never
@@ -168,6 +183,10 @@ if (contains_url($name) || contains_url($subject) || url_count($message) > MAX_M
 }
 
 if (has_spam_pattern($subject . "\n" . $message)) {
+    reject_suspicious_submission();
+}
+
+if (has_too_many_non_latin_letters($subject . "\n" . $message)) {
     reject_suspicious_submission();
 }
 
