@@ -365,17 +365,6 @@ p {
   font-weight: 700;
 }
 
-.gallery-message {
-  display: grid;
-  min-height: inherit;
-  margin: 0;
-  place-items: center;
-  padding: 2rem;
-  color: white;
-  font-weight: 700;
-  text-align: center;
-}
-
 .gallery-dots {
   display: flex;
   justify-content: center;

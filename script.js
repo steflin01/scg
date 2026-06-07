@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const gallery = document.querySelector('[data-gallery-slider]');
   if (gallery) {
+    const gallerySection = document.querySelector('[data-gallery-section]');
+    const galleryLinks = Array.from(document.querySelectorAll('[data-gallery-link]'));
     const dotsContainer = document.querySelector('[data-gallery-dots]');
     const prevButton = document.querySelector('[data-gallery-prev]');
     const nextButton = document.querySelector('[data-gallery-next]');
@@ -48,12 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let activeIndex = 0;
     let autoplayTimer = null;
 
-    const setGalleryMessage = function (message) {
-      gallery.innerHTML = '';
-      const messageElement = document.createElement('p');
-      messageElement.className = 'gallery-message';
-      messageElement.textContent = message;
-      gallery.appendChild(messageElement);
+    const setGalleryVisibility = function (isVisible) {
+      if (gallerySection) {
+        gallerySection.hidden = !isVisible;
+      }
+
+      galleryLinks.forEach(link => {
+        link.hidden = !isVisible;
+      });
     };
 
     const createSlide = function (item, index) {
@@ -138,11 +142,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const initGallery = function (items) {
       const galleryItems = items.filter(item => item && item.src);
       if (!galleryItems.length) {
-        setGalleryMessage('Zurzeit sind keine Galeriebilder hinterlegt.');
+        setGalleryVisibility(false);
         setControlsVisibility();
         return;
       }
 
+      setGalleryVisibility(true);
       gallery.innerHTML = '';
       if (dotsContainer) {
         dotsContainer.innerHTML = '';
@@ -212,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
         initGallery(items);
       })
       .catch(() => {
-        setGalleryMessage('Die Galerie konnte gerade nicht geladen werden.');
+        setGalleryVisibility(false);
         setControlsVisibility();
       });
   }
