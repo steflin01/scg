@@ -11,6 +11,7 @@ Einfache statische Website für die Badmintonabteilung des SC Gremmendorf.
 - `update-fixtures.php` - Per URL aufrufbarer, token-geschützter Aktualisierer für `fixtures.json`
 - `.update-fixtures-token.example.php` - Beispiel für die lokale Token-Konfiguration
 - `fixtures.json` - automatisch erzeugte Datei mit den nächsten Mannschaftsspielen
+- `gallery.json` - Bildliste für die Galerie auf der Startseite
 - `styles.css` - Layout und Design
 - `script.js` - Interaktionen und Anzeige der nächsten Mannschaftsspiele
 - `scripts/update-fixtures.py` - Importiert die nächsten Spiele aus den DBV-Teamspielplänen
@@ -18,6 +19,25 @@ Einfache statische Website für die Badmintonabteilung des SC Gremmendorf.
 ## Logo
 
 Platziere dein Vereinslogo unter `images/logo.png`, damit es im Kopfbereich der Seite angezeigt wird.
+
+## Galerie pflegen
+
+Die Galerie auf der Startseite wird aus `gallery.json` erzeugt. Die Bilddateien liegen unter `images/gallery/`.
+
+Ein Eintrag sieht so aus:
+
+```json
+{
+  "src": "images/gallery/training-01.jpg",
+  "alt": "Badmintontraining in der Sporthalle Gremmendorf",
+  "caption": "Training in der Sporthalle Gremmendorf.",
+  "enabled": true
+}
+```
+
+Mit `"enabled": false` kann ein Bild vorübergehend ausgeblendet werden, ohne den Eintrag zu löschen. Wenn keine aktiven Bilder vorhanden sind, wird der gesamte Galerie-Block inklusive Navigationseintrag ausgeblendet.
+
+Bilder sollten vor dem Hochladen webtauglich verkleinert werden, z. B. auf etwa 1600 px Breite als `.jpg` oder `.webp`.
 
 ## Mannschaftsspiele aktualisieren
 
