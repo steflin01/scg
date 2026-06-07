@@ -43,6 +43,12 @@ jobs:
           cp fixtures.json public/
           cp robots.txt public/
           cp sitemap.xml public/
+          cp favicon.ico public/
+          cp favicon-32x32.png public/
+          cp apple-touch-icon.png public/
+          cp android-chrome-192x192.png public/
+          cp android-chrome-512x512.png public/
+          cp site.webmanifest public/
           cp .htaccess public/
           cp images/logo.png public/images/
           cp images/hero-badminton.png public/images/
