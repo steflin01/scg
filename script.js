@@ -142,22 +142,21 @@ document.addEventListener('DOMContentLoaded', function () {
   if (form && status) {
     const formStartedAt = document.getElementById('formStartedAt');
     const formToken = document.getElementById('formToken');
-    const refreshFormToken = function () {
-      const startedAt = Math.floor(Date.now() / 1000).toString();
-      if (formStartedAt) {
-        formStartedAt.value = startedAt;
+    const ensureFormToken = function () {
+      if (formStartedAt && !formStartedAt.value) {
+        formStartedAt.value = Math.floor(Date.now() / 1000).toString();
       }
 
-      if (formToken) {
-        formToken.value = `scg-contact-${startedAt}`;
+      if (formStartedAt && formToken) {
+        formToken.value = `scg-contact-${formStartedAt.value}`;
       }
     };
 
-    refreshFormToken();
+    ensureFormToken();
 
     form.addEventListener('submit', async function (event) {
       event.preventDefault();
-      refreshFormToken();
+      ensureFormToken();
       const submitButton = form.querySelector('button[type="submit"]');
       if (submitButton) {
         submitButton.disabled = true;
