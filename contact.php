@@ -13,6 +13,7 @@ const RATE_LIMIT_MIN_SECONDS = 45;
 const MAX_MESSAGE_URLS = 0;
 const MIN_MESSAGE_LENGTH = 15;
 const MAX_NON_LATIN_LETTER_RATIO = 0.20;
+const SPAM_LOG_FILE = __DIR__ . '/.contact-spam.log';
 
 function respond(int $statusCode, bool $success, string $message): never
 {
@@ -84,14 +85,31 @@ function has_too_many_non_latin_letters(string $value): bool
     return ($nonLatinLetters / $letters) > MAX_NON_LATIN_LETTER_RATIO;
 }
 
-function reject_suspicious_submission(): never
-{
-    respond(400, false, 'Bitte prüfe deine Eingaben und sende das Formular erneut.');
-}
-
 function client_ip(): string
 {
     return (string)($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+}
+
+function log_blocked_submission(string $reason): void
+{
+    $entry = [
+        'time' => gmdate(DateTimeInterface::ATOM),
+        'reason' => $reason,
+        'ipHash' => hash('sha256', client_ip()),
+        'userAgent' => mb_substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 180),
+    ];
+
+    file_put_contents(
+        SPAM_LOG_FILE,
+        json_encode($entry, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n",
+        FILE_APPEND | LOCK_EX
+    );
+}
+
+function reject_suspicious_submission(string $reason): never
+{
+    log_blocked_submission($reason);
+    respond(400, false, 'Bitte prüfe deine Eingaben und sende das Formular erneut.');
 }
 
 function rate_limit_path(string $ip): string
@@ -118,10 +136,12 @@ function enforce_rate_limit(string $ip): void
     sort($attempts);
     $lastAttempt = end($attempts);
     if (is_int($lastAttempt) && ($now - $lastAttempt) < RATE_LIMIT_MIN_SECONDS) {
+        log_blocked_submission('rate_limit_min_interval');
         respond(429, false, 'Bitte warte einen Moment, bevor du erneut sendest.');
     }
 
     if (count($attempts) >= RATE_LIMIT_MAX_SUBMISSIONS) {
+        log_blocked_submission('rate_limit_window');
         respond(429, false, 'Zu viele Nachrichten in kurzer Zeit. Bitte versuche es später erneut.');
     }
 
@@ -134,21 +154,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (field('website') !== '') {
+    log_blocked_submission('honeypot');
     respond(200, true, 'Danke! Deine Nachricht wurde gesendet.');
 }
 
 if (request_header('X-SCG-Form') !== 'contact') {
-    reject_suspicious_submission();
+    reject_suspicious_submission('missing_form_header');
 }
 
 $startedAt = (int)field('form_started_at');
 $formToken = field('form_token');
 if ($startedAt <= 0 || $formToken !== ('scg-contact-' . $startedAt)) {
-    reject_suspicious_submission();
+    reject_suspicious_submission('invalid_form_token');
 }
 
 if ((time() - $startedAt) < MIN_SUBMIT_SECONDS) {
-    reject_suspicious_submission();
+    reject_suspicious_submission('submitted_too_fast');
 }
 
 enforce_rate_limit(client_ip());
@@ -179,15 +200,15 @@ if (mb_strlen($message) > 5000) {
 }
 
 if (contains_url($name) || contains_url($subject) || url_count($message) > MAX_MESSAGE_URLS) {
-    reject_suspicious_submission();
+    reject_suspicious_submission('url_detected');
 }
 
 if (has_spam_pattern($subject . "\n" . $message)) {
-    reject_suspicious_submission();
+    reject_suspicious_submission('spam_pattern');
 }
 
 if (has_too_many_non_latin_letters($subject . "\n" . $message)) {
-    reject_suspicious_submission();
+    reject_suspicious_submission('non_latin_ratio');
 }
 
 $safeName = clean_header_value($name);
