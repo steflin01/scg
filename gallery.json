@@ -3,12 +3,36 @@
     "src": "images/gallery/dsc_0281.jpg",
     "alt": "Badmintonschlaeger und Federball in der Halle",
     "caption": "Training, Spiel und Bewegung in der Halle.",
-    "enabled": false
+    "enabled": true
   },
   {
     "src": "images/gallery/dsc_0281-2.jpg",
     "alt": "Badminton-Impression aus der Sporthalle",
     "caption": "Badminton in Muenster-Gremmendorf.",
-    "enabled": false
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0281.jpg",
+    "alt": "Badmintonschlaeger und Federball in der Halle",
+    "caption": "Training, Spiel und Bewegung in der Halle.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0281-2.jpg",
+    "alt": "Badminton-Impression aus der Sporthalle",
+    "caption": "Badminton in Muenster-Gremmendorf.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0281.jpg",
+    "alt": "Badmintonschlaeger und Federball in der Halle",
+    "caption": "Training, Spiel und Bewegung in der Halle.",
+    "enabled": true
+  },
+  {
+    "src": "images/gallery/dsc_0281-2.jpg",
+    "alt": "Badminton-Impression aus der Sporthalle",
+    "caption": "Badminton in Muenster-Gremmendorf.",
+    "enabled": true
   }
 ]
