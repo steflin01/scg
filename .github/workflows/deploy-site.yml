@@ -54,6 +54,7 @@ jobs:
           cp images/logo.png public/images/
           cp images/hero-badminton.png public/images/
           cp images/hero-badminton.webp public/images/
+          cp images/zweite_mannschaft.jpg public/images/
           if [ -d images/gallery ]; then
             mkdir -p public/images/gallery
             cp -R images/gallery/. public/images/gallery/
